@@ -1,30 +1,16 @@
+import ocorre
+
 i = 1
 print('-=' * 20)
 print(f'{"BEM VINDO AO SISTEMA DE OUVIDORIA!":>38}')
 print('-=' * 20)
+
+
 def divisoria():
     print('-' * 35)
-"""def checagem(opcao):
-    while opcao < 0 or opcao > (len(listaMenu))-1:
-        print('Opção errada, tente novamente!')
-        divisoria()
-        opcao = int(input('Digite novamente: '))"""
-class Ocorrencia:
-    elogio = []
-    reclamacao = []
-    def inserir(self,categoria):
-        if categoria == 1:
-            self.elogio.append(inserirOcorrencia)
-        elif categoria == 2:
-            self.reclamacao.append(inserirOcorrencia)
 
-    def apagar(self,listarTipo):
-        if listarTipo == 1:
-            del self.elogio[opcaoApagando - 1]
-        elif listarTipo == 2:
-            del self.reclamacao[opcaoApagando - 1]
 
-selecionado = Ocorrencia()
+selecionado = ocorre.Ocorrencia()
 
 while i != 0:
     print('1 - Cadastrar Ocorrência')
@@ -32,7 +18,7 @@ while i != 0:
     print('3 - Apagar Ocorrência(s)')
     print('0 - Sair')
     opcao = int(input('digite a opção desejada: '))
-    if (opcao < 0) or (opcao > 3) :
+    if (opcao < 0) or (opcao > 3):
         print('Opção errada, tente novamente!')
         divisoria()
     else:
@@ -44,9 +30,9 @@ while i != 0:
             print('1 - Elogio ')
             print('2 - Reclamação')
             print('0 - Voltar')
-            #listaMenu = [0,1,2]
+
             categoria = int(input('Escolha a categoria da sua ocorrência: '))
-            #checagem(categoria)
+
             while categoria < 0 or categoria > 2:
                 print('Opção errada, tente novamente!')
                 divisoria()
@@ -55,7 +41,7 @@ while i != 0:
                 divisoria()
             else:
                 inserirOcorrencia = input('Digite sua opinião: ')
-                selecionado.inserir(categoria)
+                selecionado.inserir(categoria, inserirOcorrencia)
                 print('Sua opinião foi registrada!')
                 divisoria()
         elif (opcao == 2):
@@ -70,7 +56,7 @@ while i != 0:
                 print('2 - Lista de Reclamação(ões)')
                 print('3 - Todas as Ocorrências')
                 print('0 - Voltar')
-                #listaMenu = [0, 1, 2, 3]
+                # listaMenu = [0, 1, 2, 3]
                 listarTipo = int(input('Digite a opção desejada: '))
                 while listarTipo < 0 or listarTipo > 3:
                     print('Opção errada, tente novamente!')
@@ -80,9 +66,8 @@ while i != 0:
                     divisoria()
                     print('Lista de Elogio(s):')
                     divisoria()
-                    for x in range(len(selecionado.elogio)):
-                        print('%d -> %s' % (x+1,selecionado.elogio[x]))
-                        divisoria()
+                    selecionado.listar(listarTipo)
+                    divisoria()
                 elif (listarTipo == 1) and (len(selecionado.elogio) == 0):
                     print('Ainda não possui elogio registrado.')
                     divisoria()
@@ -90,9 +75,8 @@ while i != 0:
                     divisoria()
                     print('Ocorrências de Reclamações:')
                     divisoria()
-                    for x in range(len(selecionado.reclamacao)):
-                        print('%d -> %s' % (x+1,selecionado.reclamacao[x]))
-                        divisoria()
+                    selecionado.listar(listarTipo)
+                    divisoria()
                 elif (listarTipo == 2) and (len(selecionado.reclamacao) == 0):
                     print('Ainda não possui reclamações registradas.')
                     divisoria()
@@ -100,12 +84,8 @@ while i != 0:
                     divisoria()
                     print('Todas as ocorrências:')
                     divisoria()
-                    for x in range(len(selecionado.elogio)):
-                        print('Elogio(os) -> %s' % selecionado.elogio[x])
-                        divisoria()
-                    for x in range(len(selecionado.reclamacao)):
-                        print('Reclamação(ões) -> %s' % (selecionado.reclamacao[x]))
-                        divisoria()
+                    selecionado.listar(listarTipo)
+                    divisoria()
                 else:
                     divisoria()
         elif (opcao == 3):
@@ -119,7 +99,7 @@ while i != 0:
                 print('1 - Apagar ocorrência especifica: ')
                 print('2 - Apagar tudo')
                 print('0 - Voltar')
-                #listaMenu = [0, 1, 2]
+
                 opcaoApagar = int(input('Digite a opção desejada:'))
                 while opcaoApagar < 0 or opcaoApagar > 2:
                     print('Opção errada, tente novamente!')
@@ -136,9 +116,9 @@ while i != 0:
                         listarTipo = int(input('Digite a opção desejada: '))
                     if (listarTipo == 1) and (len(selecionado.elogio) > 0):
                         for x in range(len(selecionado.elogio)):
-                            print('%d -> %s' % (x+1, selecionado.elogio[x]))
+                            print('%d -> %s' % (x + 1, selecionado.elogio[x]))
                         opcaoApagando = int(input('Digite o indice que deseja apagar: '))
-                        selecionado.apagar(listarTipo)
+                        selecionado.apagar(listarTipo, opcaoApagando)
                         print('Ocorrência %d apagada com sucesso!' % opcaoApagando)
                         divisoria()
                     elif (listarTipo == 1) and (len(selecionado.elogio) == 0):
@@ -146,9 +126,9 @@ while i != 0:
                         divisoria()
                     elif (listarTipo == 2) and (len(selecionado.reclamacao) > 0):
                         for x in range(len(selecionado.reclamacao)):
-                            print('%d -> %s' % (x+1, selecionado.reclamacao[x]))
+                            print('%d -> %s' % (x + 1, selecionado.reclamacao[x]))
                         opcaoApagando = int(input('Digite o indice que deseja apagar: '))
-                        selecionado.apagar(listarTipo)
+                        selecionado.apagar(listarTipo, opcaoApagando)
                         print('Ocorrência %d apagada com sucesso!' % opcaoApagando)
                         divisoria()
                     elif (listarTipo == 2) and (len(selecionado.reclamacao) == 0):
@@ -156,10 +136,7 @@ while i != 0:
                     else:
                         divisoria()
                 elif (opcaoApagar == 2):
-                    for x in range(len(selecionado.elogio)):
-                        del selecionado.elogio[x - 1]
-                    for x in range(len(selecionado.reclamacao)):
-                        del selecionado.reclamacao[x - 1]
+                    selecionado.apagar(opcaoApagar, opcaoApagar)
                     print('Todas as ocorrências foram apagadas!')
                     divisoria()
                 else:
